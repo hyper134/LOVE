@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>5-Step Proposal</title>
+    <title>Mai</title>
     <style>
         body {
             margin: 0;
@@ -19,6 +19,7 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
+            position: relative; /* Added for absolute positioning of buttons */
         }
         h1, p {
             margin: 0.5rem;
@@ -35,13 +36,11 @@
             cursor: pointer;
             margin-top: 2rem;
             transition: background-color 0.3s, transform 0.2s;
+            position: relative; /* Changed to relative */
         }
         .btn:hover {
             background-color: #ffe5e9;
             transform: scale(1.05);
-        }
-        .hidden {
-            display: none;
         }
     </style>
     <script>
@@ -62,7 +61,7 @@
                 content.innerHTML = "Do you love me?";
                 buttonContainer.innerHTML = `
                     <button class="btn" onclick="yes()">Yes</button>
-                    <button class="btn" onclick="no()">No</button>
+                    <button class="btn" id="noButton" onclick="moveNoButton()">No</button>
                 `;
                 return;
             }
@@ -73,8 +72,14 @@
             window.location.href = "love-you.html"; // Redirect to next page
         }
 
-        function no() {
-            alert("Come on, you know you do! 😘");
+        function moveNoButton() {
+            const noButton = document.getElementById("noButton");
+            const container = document.querySelector('.container');
+            const x = Math.random() * (container.clientWidth - noButton.clientWidth);
+            const y = Math.random() * (container.clientHeight - noButton.clientHeight);
+            noButton.style.position = 'absolute'; // Ensure it moves freely
+            noButton.style.left = x + 'px';
+            noButton.style.top = y + 'px';
         }
     </script>
 </head>
